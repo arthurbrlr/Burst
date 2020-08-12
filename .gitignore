@@ -350,5 +350,6 @@ MigrationBackup/
 .ionide/
 
 
-bin/
-bin-int/
+[Bb]in/
+[Bb]in-int/
+*.lib
