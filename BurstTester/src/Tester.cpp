@@ -3,7 +3,7 @@
 #include <iostream>
 #include <chrono>
 
-#include "Burst/Burst.h"
+#include "Burst.h"
 #include "Components.h"
 
 int main()

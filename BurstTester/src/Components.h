@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Burst/Burst.h"
+#include "Burst.h"
 #include <iostream>
 
 #define BURST_COMPONENT(type) Burst::ComponentID type::_ID = Burst::GetComponentID<type>();

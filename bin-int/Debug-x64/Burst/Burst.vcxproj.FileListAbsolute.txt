@@ -1,0 +1,2 @@
+D:\_code\Burst\bin\Debug-x64\Burst\Burst.pdb
+D:\_code\Burst\bin-int\Debug-x64\Burst\Burst.pdb

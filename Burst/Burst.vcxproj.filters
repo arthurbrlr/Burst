@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Tester.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Burst\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -32,9 +29,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Components.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Burst\Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -50,12 +44,8 @@
     <ClInclude Include="src\Burst\Types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Burst\Burst.h">
+    <ClInclude Include="src\Burst.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include=".gitignore" />
-    <None Include="README.md" />
   </ItemGroup>
 </Project>
