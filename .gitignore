@@ -350,5 +350,5 @@ MigrationBackup/
 .ionide/
 
 
-/bin
-/bin-int
+bin/
+bin-int/
