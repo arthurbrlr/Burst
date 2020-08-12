@@ -7,7 +7,8 @@ namespace Burst {
 
 	class Component {
 		public:
-			Component() : _entityGuid(INVALID_GUID), _poolIndex(INVALID_POOL_INDEX)
+			Component() 
+				: _entityGuid(INVALID_GUID)
 			{
 			}
 
@@ -22,7 +23,6 @@ namespace Burst {
 
 		protected:
 			GUID _entityGuid;
-			size_t _poolIndex;
 	};
 
 }

@@ -93,12 +93,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Burst\ComponentPool.cpp" />
-    <ClCompile Include="src\Burst\Component.cpp" />
-    <ClCompile Include="src\Burst\Entity.cpp" />
-    <ClCompile Include="src\Burst\Registery.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="src\Burst\ComponentPool.h" />
     <ClInclude Include="src\Burst\Component.h" />
     <ClInclude Include="src\Burst\Entity.h" />
@@ -109,6 +103,9 @@
   <ItemGroup>
     <None Include="..\.gitignore" />
     <None Include="..\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Burst.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

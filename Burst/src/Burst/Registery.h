@@ -1,8 +1,5 @@
 #pragma once
 
-#include <unordered_map>
-#include <iostream>
-
 #include "Types.h"
 #include "Entity.h"
 #include "ComponentPool.h"
@@ -14,11 +11,11 @@ namespace Burst {
 	class Registery {
 
 		public:
-			Entity& NewEntity()
+			Entity NewEntity()
 			{
 				static GUID nextGuid = 0;
-				_entities[nextGuid++]._guid = nextGuid;
-				return _entities[nextGuid];
+				_entities[nextGuid]._guid = nextGuid;
+				return _entities[nextGuid++];
 			}
 
 
@@ -34,16 +31,18 @@ namespace Burst {
 				*/
 			}
 
-			template<typename T>
-			T* AddComponent(Entity& entity)
+			template<typename T, typename... Args>
+			T* AddComponent(Entity& entity, Args... args)
 			{
 				ComponentID compID = GetComponentID<T>();
-				//std::cout << std::endl;
-				//std::cout << "Emplacing component of id : " << compID << " into entity " << entity._guid << std::endl;
+#ifdef _DEBUG
+				std::cout << std::endl;
+				std::cout << "Emplacing component of id : " << compID << " into entity " << entity._guid << std::endl;
+#endif
 				if ( _componentPools.size() <= compID ) {
 					_componentPools[compID].InitialisePool<T>(10000);
 				}
-				return _componentPools[compID].CreateComponent<T>(entity);
+				return _componentPools[compID].CreateComponent<T>(entity, args...);
 			}
 
 			template<typename T>

@@ -19,6 +19,4 @@ namespace Burst {
 		return typeID;
 	}
 
-	static constexpr size_t INVALID_POOL_INDEX = -1;
-
 }

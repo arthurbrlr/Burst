@@ -7,8 +7,8 @@
 
 class Transform : public Burst::Component {
 	public:
-		Transform()
-			: _x(0), _y(0), _z(0)
+		Transform(float x = 0.f, float y = 0.f, float z = 0.f)
+			: _x(x), _y(y), _z(z)
 		{
 		}
 

@@ -9,8 +9,13 @@
 int main()
 {
     Burst::Registery registery;
-    Burst::Entity& player = registery.NewEntity();
-    Burst::Entity& enemy = registery.NewEntity();
+    Burst::Entity player = registery.NewEntity();
+    Burst::Entity enemy = registery.NewEntity();
+    Burst::Entity enemy2 = registery.NewEntity();
+    Burst::Entity enemy3 = registery.NewEntity();
+    Burst::Entity god = registery.NewEntity();
+    Burst::Entity devil = registery.NewEntity();
+    Burst::Entity dice = registery.NewEntity();
 
 #if 0
     auto start = std::chrono::high_resolution_clock::now();
@@ -23,15 +28,33 @@ int main()
     std::cout << "1 000 AddComponent: " << elapsed.count() << " s" << std::endl;
 #endif
 
-    registery.AddComponent<Transform>(player);
-    registery.AddComponent<Transform>(enemy);
+    Transform* playerTransform = registery.AddComponent<Transform>(player);
+    playerTransform->Print();
 
+    Transform* enemyTransform = registery.AddComponent<Transform>(enemy, 4096.f);
+    registery.AddComponent<Transform>(enemy2, 4096.f, 16024.f);
+    registery.AddComponent<Transform>(enemy3, 4096.4096f, 16024.f, 16024.f);
+    
     registery.RemoveComponent<Transform>(player);
+    playerTransform = registery.AddComponent<Transform>(player, 1.f, 1.f, 1.f);
+    playerTransform->Print();
 
-    Transform* playerTransform = registery.GetComponent<Transform>(player);
+    registery.AddComponent<Transform>(god);
+    registery.RemoveComponent<Transform>(enemy3);
+    registery.AddComponent<Transform>(devil);
+    registery.AddComponent<Transform>(dice);
+    registery.RemoveComponent<Transform>(player);
+    registery.AddComponent<Transform>(enemy3);
+    registery.AddComponent<Transform>(player);
+
+    playerTransform = registery.GetComponent<Transform>(player);
     if ( playerTransform ) {
         playerTransform->Set(51, 20);
         playerTransform->Print();
+    }
+
+    if ( enemyTransform ) {
+        enemyTransform->Print();
     }
 
     registery.AddComponent<Sprite>(player);
@@ -40,7 +63,4 @@ int main()
     auto allSprites = registery.View<Sprite>();
     auto allMeshes = registery.View<Mesh>();
 
-    //Transform::PrintID();
-    //Sprite::PrintID();
-    //Mesh::PrintID();
 }
