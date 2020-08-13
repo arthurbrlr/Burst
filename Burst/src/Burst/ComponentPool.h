@@ -101,6 +101,11 @@ namespace Burst {
 				return _componentAccessors;
 			}
 
+			const bool Initialised()
+			{
+				return _pool != nullptr;
+			}
+
 
 		private:
 			void* _pool;
@@ -110,7 +115,7 @@ namespace Burst {
 
 			void* _next;
 			void* _refBlock;
-
+			
 			std::unordered_map<Entity, Component*> _componentAccessors;
 	};
 

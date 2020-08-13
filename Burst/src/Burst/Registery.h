@@ -43,7 +43,7 @@ namespace Burst {
 				std::cout << std::endl;
 				std::cout << "Emplacing component of id : " << compID << " into entity " << entity << std::endl;
 #endif
-				if ( _componentPools.size() <= compID ) {
+				if ( !_componentPools[compID].Initialised() ) {
 					_componentPools[compID].InitialisePool<T>(10000);
 				}
 				return _componentPools[compID].CreateComponent<T>(entity, args...);
@@ -87,11 +87,28 @@ namespace Burst {
 				return false;
 			}
 
+
+				/* VIEWS */
+
 			template<typename T>
 			std::unordered_map<Entity, Component*>& View()
 			{
 				ComponentID compID = GetComponentID<T>();
 				return _componentPools[compID].View();
+			}
+
+			std::vector<Component*> View(Entity entity)
+			{
+				std::vector<Component*> view;
+				for ( auto& pool : _componentPools ) {
+					if ( pool.second.At(entity) ) {
+#ifdef _DEBUG
+						std::cout << "Component " << typeid( pool.second.At(entity) ).name() << " found for entity " << entity << std::endl;
+#endif
+						view.push_back(pool.second.At(entity));
+					}
+				}
+				return view;
 			}
 
 

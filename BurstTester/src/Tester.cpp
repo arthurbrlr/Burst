@@ -61,6 +61,8 @@ int main()
 
     registery.AddComponent<Sprite>(player);
 
+    auto playerComponents = registery.View(player);
+
     auto allTransforms = registery.View<Transform>();
     auto allSprites = registery.View<Sprite>();
     auto allMeshes = registery.View<Mesh>();
