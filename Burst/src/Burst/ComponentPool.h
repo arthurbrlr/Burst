@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Types.h"
-#include "Entity.h"
 #include "Component.h"
 
 #include <unordered_map>
@@ -55,10 +54,10 @@ namespace Burst {
 					return nullptr;
 				}
 
-				_componentAccessors[entity._guid] = (T*)_next;
+				_componentAccessors[entity] = (T*)_next;
 				T newComponent = T(args...);
-				memcpy(_componentAccessors[entity._guid], (void*)&newComponent, sizeof(T));
-				_componentAccessors[entity._guid]->Attach(entity);
+				memcpy(_componentAccessors[entity], (void*)&newComponent, sizeof(T));
+				_componentAccessors[entity]->Attach(entity);
 
 				_next = static_cast<char*>( _next ) + sizeof(T);
 
@@ -67,18 +66,18 @@ namespace Burst {
 				}
 				_count++;
 #ifdef _DEBUG
-				std::cout << "New " << typeid(T).name() << " at adress: 0x" << (int*)(_componentAccessors[entity._guid]) << std::endl;
+				std::cout << "New " << typeid(T).name() << " at adress: 0x" << (int*)(_componentAccessors[entity]) << std::endl;
 				std::cout << "Next will be at adress: 0x" << (int*)(_next) << std::endl;
 				std::cout << "----" << std::endl;
 #endif
-				return (T*)_componentAccessors[entity._guid];
+				return (T*)_componentAccessors[entity];
 			}
 
 			template<typename T>
 			void RemoveComponent(Entity& entity)
 			{
-				T* ptrToComponent = (T*)_componentAccessors[entity._guid];
-				_componentAccessors.erase(entity._guid);
+				T* ptrToComponent = (T*)_componentAccessors[entity];
+				_componentAccessors.erase(entity);
 				memset(ptrToComponent, 0, sizeof(T));
 				_next = ptrToComponent;
 				_count--;
@@ -91,13 +90,13 @@ namespace Burst {
 
 			Component* At(Entity& entity)
 			{
-				if ( _componentAccessors.find(entity._guid) != _componentAccessors.end() ) {
-					return _componentAccessors[entity._guid];
+				if ( _componentAccessors.find(entity) != _componentAccessors.end() ) {
+					return _componentAccessors[entity];
 				}
 				return nullptr;
 			}
 
-			std::unordered_map<GUID, Component*>& View()
+			std::unordered_map<Entity, Component*>& View()
 			{
 				return _componentAccessors;
 			}
@@ -112,7 +111,7 @@ namespace Burst {
 			void* _next;
 			void* _refBlock;
 
-			std::unordered_map<GUID, Component*> _componentAccessors;
+			std::unordered_map<Entity, Component*> _componentAccessors;
 	};
 
 }

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Types.h"
-#include "Entity.h"
 #include "ComponentPool.h"
 
 namespace Burst {
@@ -11,11 +10,13 @@ namespace Burst {
 	class Registery {
 
 		public:
+
+				/* ENTITIES */
+
 			Entity NewEntity()
 			{
-				static GUID nextGuid = 0;
-				_entities[nextGuid]._guid = nextGuid;
-				return _entities[nextGuid++];
+				static Entity next = 0;
+				return (Entity)next++;
 			}
 
 
@@ -31,13 +32,16 @@ namespace Burst {
 				*/
 			}
 
+
+				/* COMPONENTS */
+
 			template<typename T, typename... Args>
 			T* AddComponent(Entity& entity, Args... args)
 			{
 				ComponentID compID = GetComponentID<T>();
 #ifdef _DEBUG
 				std::cout << std::endl;
-				std::cout << "Emplacing component of id : " << compID << " into entity " << entity._guid << std::endl;
+				std::cout << "Emplacing component of id : " << compID << " into entity " << entity << std::endl;
 #endif
 				if ( _componentPools.size() <= compID ) {
 					_componentPools[compID].InitialisePool<T>(10000);
@@ -53,16 +57,11 @@ namespace Burst {
 					return;
 				}
 				_componentPools[compID].RemoveComponent<T>(entity);
+#ifdef _DEBUG
+				std::cout << "Removing component of id : " << compID << " of entity " << entity << std::endl;
+#endif
 				return;
 			}
-
-			template<typename T>
-			std::unordered_map<GUID, Component*>& View()
-			{
-				ComponentID compID = GetComponentID<T>();
-				return _componentPools[compID].View();
-			}
-
 
 			template<typename T>
 			T* GetComponent(Entity& entity)
@@ -72,11 +71,33 @@ namespace Burst {
 				return (T*)_componentPools[compID].At(entity);
 			}
 
+			template<typename T>
+			bool HasComponent(Entity& entity)
+			{
+				ComponentID compID = GetComponentID<T>();
+				if ( _componentPools[compID].At(entity) ) {
+#ifdef _DEBUG
+					std::cout << "Entity " << entity << " has component of id : " << compID << std::endl;
+#endif
+					return true;
+				}
+#ifdef _DEBUG
+				std::cout << "Entity " << entity << " has no component of id : " << compID << std::endl;
+#endif
+				return false;
+			}
+
+			template<typename T>
+			std::unordered_map<Entity, Component*>& View()
+			{
+				ComponentID compID = GetComponentID<T>();
+				return _componentPools[compID].View();
+			}
+
+
 		private:
-			using Entities = std::unordered_map<GUID, Entity>;
 			using Components = std::unordered_map<ComponentID, ComponentPool>;
 
-			Entities _entities;
 			Components _componentPools;
 
 	};

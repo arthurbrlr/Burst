@@ -2,8 +2,9 @@
 
 namespace Burst {
 	
-	typedef size_t GUID;
-	static constexpr GUID INVALID_GUID = -1;
+
+	typedef size_t Entity;
+	static constexpr Entity INVALID_ENTITY = -1;
 
 	typedef size_t ComponentID;
 	static inline ComponentID NextComponentID()

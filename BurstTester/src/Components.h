@@ -21,7 +21,7 @@ class Transform : public Burst::Component {
 
 		void Print()
 		{
-			std::cout << "Transform for entity : " << _entityGuid << " > " << _x << " ; " << _y << " ; " << _z << std::endl;
+			std::cout << "Transform for entity : " << _entity << " > " << _x << " ; " << _y << " ; " << _z << std::endl;
 		}
 
 	private:

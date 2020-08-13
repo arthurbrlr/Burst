@@ -21,9 +21,6 @@
     <ClInclude Include="src\Burst\ComponentPool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Burst\Entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Burst\Registery.h">
       <Filter>Header Files</Filter>
     </ClInclude>

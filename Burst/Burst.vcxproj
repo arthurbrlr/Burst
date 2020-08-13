@@ -95,7 +95,6 @@
   <ItemGroup>
     <ClInclude Include="src\Burst\ComponentPool.h" />
     <ClInclude Include="src\Burst\Component.h" />
-    <ClInclude Include="src\Burst\Entity.h" />
     <ClInclude Include="src\Burst.h" />
     <ClInclude Include="src\Burst\Types.h" />
     <ClInclude Include="src\Burst\Registery.h" />

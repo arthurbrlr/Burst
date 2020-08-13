@@ -29,6 +29,8 @@ int main()
 #endif
 
     Transform* playerTransform = registery.AddComponent<Transform>(player);
+    registery.HasComponent<Transform>(player);
+    registery.HasComponent<Sprite>(player);
     playerTransform->Print();
 
     Transform* enemyTransform = registery.AddComponent<Transform>(enemy, 4096.f);

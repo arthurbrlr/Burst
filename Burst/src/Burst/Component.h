@@ -1,14 +1,13 @@
 #pragma once
 
 #include "Types.h"
-#include "Entity.h"
 
 namespace Burst {
 
 	class Component {
 		public:
 			Component() 
-				: _entityGuid(INVALID_GUID)
+				: _entity(INVALID_ENTITY)
 			{
 			}
 
@@ -18,11 +17,11 @@ namespace Burst {
 
 			void Attach(Entity& entity)
 			{
-				_entityGuid = entity._guid;
+				_entity = entity;
 			}
 
 		protected:
-			GUID _entityGuid;
+			Entity _entity;
 	};
 
 }
