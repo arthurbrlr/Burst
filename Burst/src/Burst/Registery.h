@@ -7,17 +7,25 @@ namespace Burst {
 
 	class Component;
 
-	static Entity nextEntity = 0;
-
 	template<typename TExternalEntityIdentifier = Entity>
 	class Registery {
 
 		public:
 
 				/* ENTITIES */
-
-			Entity NewEntity(const TExternalEntityIdentifier& id = nextEntity)
+			
+			Entity NewEntity()
 			{
+				_entities[nextEntity] = nextEntity;
+				return (Entity)nextEntity++;
+			}
+
+
+			Entity NewEntity(const TExternalEntityIdentifier& id)
+			{
+#if _DEBUG
+				std::cout << "Key is " << id << std::endl;
+#endif
 				_entities[id] = nextEntity;
 				return (Entity)nextEntity++;
 			}
@@ -122,7 +130,7 @@ namespace Burst {
 				return _entities;
 			}
 
-			Entity GetEntityFromEntityID(const TExternalEntityIdentifier& id)
+			Entity GetEntityFromExternID(const TExternalEntityIdentifier& id)
 			{
 				return _entities[id];
 			}
@@ -133,7 +141,7 @@ namespace Burst {
 
 			Entities _entities;
 			Components _componentPools;
-
+			Entity nextEntity = 0;
 	};
 }
 
