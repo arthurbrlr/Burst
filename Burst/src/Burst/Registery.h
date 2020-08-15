@@ -7,16 +7,19 @@ namespace Burst {
 
 	class Component;
 
+	static Entity nextEntity = 0;
+
+	template<typename TExternalEntityIdentifier = Entity>
 	class Registery {
 
 		public:
 
 				/* ENTITIES */
 
-			Entity NewEntity()
+			Entity NewEntity(const TExternalEntityIdentifier& id = nextEntity)
 			{
-				static Entity next = 0;
-				return (Entity)next++;
+				_entities[id] = nextEntity;
+				return (Entity)nextEntity++;
 			}
 
 
@@ -88,7 +91,7 @@ namespace Burst {
 			}
 
 
-				/* VIEWS */
+				/* COMPONENT VIEWS */
 
 			template<typename T>
 			std::unordered_map<Entity, Component*>& View()
@@ -112,9 +115,23 @@ namespace Burst {
 			}
 
 
+				/* ENTITIES VIEWS */
+
+			const std::unordered_map<TExternalEntityIdentifier, Entity>& ViewEntities()
+			{
+				return _entities;
+			}
+
+			Entity GetEntityFromEntityID(const TExternalEntityIdentifier& id)
+			{
+				return _entities[id];
+			}
+
 		private:
+			using Entities = std::unordered_map<TExternalEntityIdentifier, Entity>;
 			using Components = std::unordered_map<ComponentID, ComponentPool>;
 
+			Entities _entities;
 			Components _componentPools;
 
 	};

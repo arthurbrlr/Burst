@@ -8,7 +8,7 @@
 
 int main()
 {
-    Burst::Registery registery;
+    Burst::Registery<> registery;
     Burst::Entity player = registery.NewEntity();
     Burst::Entity enemy = registery.NewEntity();
     Burst::Entity enemy2 = registery.NewEntity();
@@ -62,6 +62,8 @@ int main()
     registery.AddComponent<Sprite>(player);
 
     auto playerComponents = registery.View(player);
+
+    auto allEntities = registery.ViewEntities();
 
     auto allTransforms = registery.View<Transform>();
     auto allSprites = registery.View<Sprite>();
