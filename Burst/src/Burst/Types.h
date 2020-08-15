@@ -14,7 +14,7 @@ namespace Burst {
 	}
 
 	template<typename T>
-	static ComponentID GetComponentID()
+	static inline ComponentID GetComponentID()
 	{
 		static ComponentID typeID = NextComponentID();
 		return typeID;
