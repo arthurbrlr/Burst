@@ -6,7 +6,7 @@
 #include <unordered_map>
 #include <stdexcept>
 
-#ifdef _DEBUG
+#ifdef _BURST_DEBUG
 	#include <iostream>
 #endif
 
@@ -36,7 +36,7 @@ namespace Burst {
 				//_pool = new T[_poolSize];
 				_pool = calloc( sizeof(T), poolSize );
 				_refBlock = calloc( sizeof(T), (size_t)1 );
-#ifdef _DEBUG
+#ifdef _BURST_DEBUG
 				std::cout << "Initialising pool of component " << typeid(T).name() << " (ID: " << GetComponentID<T>() << ") with a size of: " << poolSize << std::endl;
 				std::cout << "Size of the pool: " << sizeof(T) * poolSize << " bytes." << std::endl;
 				std::cout << "Pool is at adress: " << _pool << std::endl;
@@ -65,7 +65,7 @@ namespace Burst {
 					_next = static_cast<char*>( _next ) + sizeof(T);
 				}
 				_count++;
-#ifdef _DEBUG
+#ifdef _BURST_DEBUG
 				std::cout << "New " << typeid(T).name() << " at adress: 0x" << (int*)(_componentAccessors[entity]) << std::endl;
 				std::cout << "Next will be at adress: 0x" << (int*)(_next) << std::endl;
 				std::cout << "----" << std::endl;

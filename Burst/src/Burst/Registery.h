@@ -23,7 +23,7 @@ namespace Burst {
 
 			Entity NewEntity(const TExternalEntityIdentifier& id)
 			{
-#if _DEBUG
+#ifdef _BURST_DEBUG
 				std::cout << "Key is " << id << std::endl;
 #endif
 				_entities[id] = nextEntity;
@@ -50,7 +50,7 @@ namespace Burst {
 			T* AddComponent(Entity& entity, Args... args)
 			{
 				ComponentID compID = GetComponentID<T>();
-#ifdef _DEBUG
+#ifdef _BURST_DEBUG
 				std::cout << std::endl;
 				std::cout << "Emplacing component of id : " << compID << " into entity " << entity << std::endl;
 #endif
@@ -68,7 +68,7 @@ namespace Burst {
 					return;
 				}
 				_componentPools[compID].RemoveComponent<T>(entity);
-#ifdef _DEBUG
+#ifdef _BURST_DEBUG
 				std::cout << "Removing component of id : " << compID << " of entity " << entity << std::endl;
 #endif
 				return;
@@ -87,12 +87,12 @@ namespace Burst {
 			{
 				ComponentID compID = GetComponentID<T>();
 				if ( _componentPools[compID].At(entity) ) {
-#ifdef _DEBUG
+#ifdef _BURST_DEBUG
 					std::cout << "Entity " << entity << " has component of id : " << compID << std::endl;
 #endif
 					return true;
 				}
-#ifdef _DEBUG
+#ifdef _BURST_DEBUG
 				std::cout << "Entity " << entity << " has no component of id : " << compID << std::endl;
 #endif
 				return false;
@@ -113,7 +113,7 @@ namespace Burst {
 				std::vector<Component*> view;
 				for ( auto& pool : _componentPools ) {
 					if ( pool.second.At(entity) ) {
-#ifdef _DEBUG
+#ifdef _BURST_DEBUG
 						std::cout << "Component " << typeid( pool.second.At(entity) ).name() << " found for entity " << entity << std::endl;
 #endif
 						view.push_back(pool.second.At(entity));
