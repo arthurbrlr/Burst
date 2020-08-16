@@ -8,9 +8,9 @@
 
 #include "Components.h"
 
-BURST_COMPONENT(Transform)
-BURST_COMPONENT(Sprite)
-BURST_COMPONENT(Mesh)
+//BURST_COMPONENT(Transform)
+//BURST_COMPONENT(Sprite)
+//BURST_COMPONENT(Mesh)
 
 int main()
 {
