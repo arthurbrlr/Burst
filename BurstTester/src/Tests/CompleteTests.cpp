@@ -1,5 +1,5 @@
 #include "Tests.h"
-#include "../Components.h"
+#include "../TestComponents.h"
 
 #include <random>
 #include <sstream>

@@ -23,8 +23,7 @@ class Transform : public Burst::Component {
 		}
 
 	private:
-		//static Burst::ComponentID _ID;
-		BURST_COMPONENT(Transform)
+		BURST_DECL_COMPONENT(Transform)
 		float _x, _y, _z;
 };
 
@@ -33,8 +32,7 @@ class Sprite : public Burst::Component {
 public:
 
 private:
-	//static Burst::ComponentID _ID;
-	BURST_COMPONENT(Sprite)
+	BURST_DECL_COMPONENT(Sprite)
 };
 
 
@@ -42,6 +40,5 @@ class Mesh : public Burst::Component {
 public:
 
 private:
-	//static Burst::ComponentID _ID;
-	BURST_COMPONENT(Mesh)
+	BURST_DECL_COMPONENT(Mesh)
 };

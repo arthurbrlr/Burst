@@ -1,5 +1,5 @@
 #include "Tests.h"
-#include "../Components.h"
+#include "../TestComponents.h"
 
 
 bool BurstTest_ComponentTest_Emplacing()

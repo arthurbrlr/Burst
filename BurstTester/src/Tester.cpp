@@ -6,11 +6,8 @@
 #include "Burst.h"
 #include "Tests/Tests.h"
 
-#include "Components.h"
+#include "TestComponents.h"
 
-//BURST_COMPONENT(Transform)
-//BURST_COMPONENT(Sprite)
-//BURST_COMPONENT(Mesh)
 
 int main()
 {
