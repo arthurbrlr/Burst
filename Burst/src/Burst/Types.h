@@ -9,7 +9,6 @@ namespace Burst {
 	typedef size_t ComponentID;
 	static inline ComponentID NextComponentID()
 	{
-#pragma message("Registering new component")
 		static ComponentID nextID = 0;
 		return nextID++;
 	}
