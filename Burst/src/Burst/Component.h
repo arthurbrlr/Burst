@@ -27,4 +27,4 @@ namespace Burst {
 
 }
 
-#define BURST_COMPONENT(type) Burst::ComponentID type::_ID = Burst::GetComponentID<type>();
+#define BURST_COMPONENT(type) Burst::ComponentID _ID = Burst::GetComponentID<type>();

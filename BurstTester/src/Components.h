@@ -24,7 +24,7 @@ class Transform : public Burst::Component {
 
 	private:
 		//static Burst::ComponentID _ID;
-		Burst::ComponentID _ID = Burst::GetComponentID<Transform>();
+		BURST_COMPONENT(Transform)
 		float _x, _y, _z;
 };
 
@@ -34,7 +34,7 @@ public:
 
 private:
 	//static Burst::ComponentID _ID;
-	Burst::ComponentID _ID = Burst::GetComponentID<Sprite>();
+	BURST_COMPONENT(Sprite)
 };
 
 
@@ -43,5 +43,5 @@ public:
 
 private:
 	//static Burst::ComponentID _ID;
-	Burst::ComponentID _ID = Burst::GetComponentID<Mesh>();
+	BURST_COMPONENT(Mesh)
 };
