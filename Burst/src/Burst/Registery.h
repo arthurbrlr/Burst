@@ -49,7 +49,7 @@ namespace Burst {
 			template<typename T, typename... Args>
 			T* AddComponent(Entity& entity, Args... args)
 			{
-				ComponentID compID = T::GetStaticComponentID();
+				ComponentID compID = GetComponentID<T>();
 #ifdef _BURST_DEBUG
 				std::cout << std::endl;
 				std::cout << "Emplacing component of id : " << compID << " into entity " << entity << std::endl;
@@ -63,7 +63,7 @@ namespace Burst {
 			template<typename T>
 			void RemoveComponent(Entity& entity)
 			{
-				ComponentID compID = T::GetStaticComponentID();
+				ComponentID compID = GetComponentID<T>();
 				if ( _componentPools.size() <= compID ) {
 					return;
 				}
@@ -77,7 +77,7 @@ namespace Burst {
 			template<typename T>
 			T* GetComponent(Entity& entity)
 			{
-				ComponentID compID = T::GetStaticComponentID();
+				ComponentID compID = GetComponentID<T>();
 				if ( _componentPools.size() <= compID ) return nullptr;
 				return (T*)_componentPools[compID].At(entity);
 			}
@@ -85,7 +85,7 @@ namespace Burst {
 			template<typename T>
 			bool HasComponent(Entity& entity)
 			{
-				ComponentID compID = T::GetStaticComponentID();
+				ComponentID compID = GetComponentID<T>();
 				if ( _componentPools[compID].At(entity) ) {
 #ifdef _BURST_DEBUG
 					std::cout << "Entity " << entity << " has component of id : " << compID << std::endl;
@@ -104,7 +104,7 @@ namespace Burst {
 			template<typename T>
 			std::unordered_map<Entity, Component*>& View()
 			{
-				ComponentID compID = T::GetStaticComponentID();
+				ComponentID compID = GetComponentID<T>();
 				return _componentPools[compID].View();
 			}
 

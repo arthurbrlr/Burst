@@ -157,6 +157,8 @@ bool BurstTest_CompleteTest_TemplatedRegistery()
         auto allTransforms = registery.View<Transform>();
         auto allSprites = registery.View<Sprite>();
         auto allMeshes = registery.View<Mesh>();
+
+        registery.AddComponent<Mesh>(player);
     } catch ( std::exception e ) {
         std::cout << e.what() << std::endl;
         success = false;

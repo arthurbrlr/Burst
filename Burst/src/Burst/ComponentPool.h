@@ -42,7 +42,7 @@ namespace Burst {
 				std::cout << "Pool is at adress: " << _pool << std::endl;
 #endif
 				_next = _pool;
-				_poolID = T::GetStaticComponentID();
+				_poolID = GetComponentID<T>();
 				_count = 0;
 			}
 

@@ -22,8 +22,9 @@ namespace Burst {
 
 		protected:
 			Entity _entity;
+			ComponentID _ID;
 	};
 
 }
 
-#define BURST_DECL_COMPONENT(type)	public: static inline Burst::ComponentID GetStaticComponentID() { return Burst::GetComponentID<type>(); } private:
+#define BURST_COMPONENT(type) Burst::ComponentID type::_ID = Burst::GetComponentID<type>();
