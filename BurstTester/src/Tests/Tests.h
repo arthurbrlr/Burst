@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <chrono>
+#include <assert.h>
 #include "Burst.h"
 
 	/* Macros */
@@ -14,19 +15,17 @@
 #define END_TEST(testname)					auto end = std::chrono::high_resolution_clock::now(); \
 											auto elapsed = std::chrono::duration_cast<std::chrono::duration<double>>( end - start ); \
 											std::cout << "**********************" << std::endl; \
-											std::cout << "*** End of test : " << #testname << " in " << elapsed.count() << " seconds." << std::endl; \
-											std::cout << "**********************" << std::endl << std::endl
+											std::cout << "*** End of test : " << #testname << " in " << elapsed.count() << " seconds : " << success << std::endl; \
+											std::cout << "**********************" << std::endl << std::endl; \
+											return success
 
-#define TEST_RESULT(testname, result)		std::cout << #testname << " : " << (bool)result; \
-											std::cout << std::endl
-	/* Entities */
-//bool BurstTest_EntityTest_Emplacing();
-//bool BurstTest_EntityTest_Removing();
+#define ASSERT(condition)					if ( condition ) std::cout << #condition << " (" << __FILE__ << " line " << __LINE__ << ") is true." << std::endl; \
+											else { \
+												std::cout << #condition << " (" << __FILE__ << " line " << __LINE__ << ") is false." << std::endl; \
+												success = false; \
+											}
 
-	/* Components */
-bool BurstTest_ComponentTest_Emplacing();
-bool BurstTest_ComponentTest_Removing();
+bool Emplace_View();
+bool Emplace_Remove_View();
 
-	/* Complete */
-bool BurstTest_CompleteTest_NormalRegistery();
-bool BurstTest_CompleteTest_TemplatedRegistery();
+bool Perfos_AddComponent();

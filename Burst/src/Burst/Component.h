@@ -22,7 +22,6 @@ namespace Burst {
 
 		protected:
 			Entity _entity;
-			ComponentID _ID;
 	};
 
 }

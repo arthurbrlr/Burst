@@ -11,20 +11,10 @@
 
 int main()
 {
-    //bool emplaceComponentResult = BurstTest_ComponentTest_Emplacing();
-    //bool removeComponentResult = BurstTest_ComponentTest_Removing();
+    bool emplaceView = Emplace_View();
+    bool emplaceRemoveView = Emplace_Remove_View();
 
-    bool normalRegistery = BurstTest_CompleteTest_NormalRegistery();
-    bool templatedRegistery = BurstTest_CompleteTest_TemplatedRegistery();
-
-
-    std::cout << "****************" << std::endl;
-    std::cout << "**** Recap: ****" << std::endl;
-    std::cout << "****************" << std::endl;
-
-    //TEST_RESULT(BurstTest_ComponentTest_Emplacing, emplaceComponentResult);
-    //TEST_RESULT(BurstTest_ComponentTest_Removing, removeComponentResult);
-
-    TEST_RESULT(BurstTest_CompleteTest_NormalRegistery, normalRegistery);
-    TEST_RESULT(BurstTest_CompleteTest_TemplatedRegistery, templatedRegistery);
+#ifdef NDEBUG
+    bool perfAddComponent = Perfos_AddComponent();
+#endif
 }

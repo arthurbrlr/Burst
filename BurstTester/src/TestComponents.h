@@ -42,3 +42,27 @@ public:
 private:
 	BURST_DECL_COMPONENT(Mesh)
 };
+
+
+class PtrComponent : public Burst::Component {
+public:
+	PtrComponent()
+	{
+		_pointerToSmthg = calloc(8, 8);
+	}
+
+	~PtrComponent()
+	{
+		delete _pointerToSmthg;
+	}
+
+	int* GetPointerAdress()
+	{
+		return (int*)( _pointerToSmthg );
+	}
+
+private:
+	void* _pointerToSmthg = nullptr;
+
+	BURST_DECL_COMPONENT(PtrComponent)
+};

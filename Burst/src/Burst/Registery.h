@@ -3,6 +3,8 @@
 #include "Types.h"
 #include "ComponentPool.h"
 
+#include <assert.h>
+
 namespace Burst {
 
 	class Component;
@@ -33,14 +35,11 @@ namespace Burst {
 
 			void DeleteEntity(Entity& entity)
 			{
-				/*
-				for (auto& componentPair : _componentPools)
-				{
-					componentPair.second.At(entity);
+				for (auto& componentPair : _componentPools) {
+					if ( componentPair.second.At(entity) )
+						componentPair.second.RemoveComponent(entity);
 				}
-
 				_entities.erase(entity._guid);
-				*/
 			}
 
 
@@ -50,6 +49,8 @@ namespace Burst {
 			T* AddComponent(Entity& entity, Args... args)
 			{
 				ComponentID compID = T::GetStaticComponentID();
+				assert(HasComponent<T>(entity), "Entity has already a component of type T");
+
 #ifdef _BURST_DEBUG
 				std::cout << std::endl;
 				std::cout << "Emplacing component of id : " << compID << " into entity " << entity << std::endl;
@@ -64,22 +65,21 @@ namespace Burst {
 			void RemoveComponent(Entity& entity)
 			{
 				ComponentID compID = T::GetStaticComponentID();
-				if ( _componentPools.size() <= compID ) {
-					return;
-				}
-				_componentPools[compID].RemoveComponent<T>(entity);
+				if ( _componentPools[compID].At(entity) ) {
+					_componentPools[compID].RemoveComponent(entity);
 #ifdef _BURST_DEBUG
-				std::cout << "Removing component of id : " << compID << " of entity " << entity << std::endl;
+					std::cout << "Removing component of id : " << compID << " of entity " << entity << std::endl;
 #endif
-				return;
+				}
 			}
 
 			template<typename T>
 			T* GetComponent(Entity& entity)
 			{
 				ComponentID compID = T::GetStaticComponentID();
-				if ( _componentPools.size() <= compID ) return nullptr;
-				return (T*)_componentPools[compID].At(entity);
+				assert(HasComponent<T>(entity), "Entity has no component of type T" );
+				if ( _componentPools[compID].At(entity) ) return (T*)_componentPools[compID].At(entity);
+				return nullptr;
 			}
 
 			template<typename T>
@@ -113,9 +113,6 @@ namespace Burst {
 				std::vector<Component*> view;
 				for ( auto& pool : _componentPools ) {
 					if ( pool.second.At(entity) ) {
-#ifdef _BURST_DEBUG
-						std::cout << "Component " << typeid( pool.second.At(entity) ).name() << " found for entity " << entity << std::endl;
-#endif
 						view.push_back(pool.second.At(entity));
 					}
 				}

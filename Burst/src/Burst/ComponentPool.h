@@ -42,7 +42,7 @@ namespace Burst {
 				std::cout << "Pool is at adress: " << _pool << std::endl;
 #endif
 				_next = _pool;
-				_poolID = GetComponentID<T>();
+				_poolID = T::GetStaticComponentID();
 				_count = 0;
 			}
 
@@ -54,10 +54,12 @@ namespace Burst {
 					return nullptr;
 				}
 
-				_componentAccessors[entity] = (T*)_next;
-				T newComponent = T(args...);
-				memcpy(_componentAccessors[entity], (void*)&newComponent, sizeof(T));
-				_componentAccessors[entity]->Attach(entity);
+				//_componentAccessors[entity] = (T*)_next;
+				//T newComponent = T(args...);
+				//memcpy(_componentAccessors[entity], (void*)&newComponent, sizeof(T));
+				//T* newComponent = new ( _next ) T(args...);
+				_componentAccessors[entity] = (T*)(new ( _next ) T(args...));//(T*)_next;
+				_componentAccessors[entity]->Attach(entity); 
 
 				_next = static_cast<char*>( _next ) + sizeof(T);
 
@@ -73,12 +75,11 @@ namespace Burst {
 				return (T*)_componentAccessors[entity];
 			}
 
-			template<typename T>
 			void RemoveComponent(Entity& entity)
 			{
-				T* ptrToComponent = (T*)_componentAccessors[entity];
+				void* ptrToComponent = (void*)_componentAccessors[entity];
 				_componentAccessors.erase(entity);
-				memset(ptrToComponent, 0, sizeof(T));
+				//memset(ptrToComponent, 0, sizeof(T));
 				_next = ptrToComponent;
 				_count--;
 			}
