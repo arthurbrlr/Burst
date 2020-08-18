@@ -49,7 +49,7 @@ namespace Burst {
 			T* AddComponent(Entity& entity, Args... args)
 			{
 				ComponentID compID = T::GetStaticComponentID();
-				assert(HasComponent<T>(entity), "Entity has already a component of type T");
+				assert(!HasComponent<T>(entity)); // Entity has already a component of type T !
 
 #ifdef _BURST_DEBUG
 				std::cout << std::endl;
@@ -77,7 +77,7 @@ namespace Burst {
 			T* GetComponent(Entity& entity)
 			{
 				ComponentID compID = T::GetStaticComponentID();
-				assert(HasComponent<T>(entity), "Entity has no component of type T" );
+				assert(HasComponent<T>(entity)); // Entity has no component of type T !
 				if ( _componentPools[compID].At(entity) ) return (T*)_componentPools[compID].At(entity);
 				return nullptr;
 			}
