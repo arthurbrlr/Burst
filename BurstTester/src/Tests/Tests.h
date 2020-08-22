@@ -27,5 +27,8 @@
 
 bool Emplace_View();
 bool Emplace_Remove_View();
+bool Emplace_RemoveEntity_View();
+
+bool ClearRegistery();
 
 bool Perfos_AddComponent();

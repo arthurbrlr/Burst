@@ -33,13 +33,21 @@ namespace Burst {
 			}
 
 
-			void DeleteEntity(Entity& entity)
+			void RemoveEntity(Entity& entity)
 			{
 				for (auto& componentPair : _componentPools) {
 					if ( componentPair.second.At(entity) )
 						componentPair.second.RemoveComponent(entity);
 				}
-				_entities.erase(entity._guid);
+				_entities.erase(entity);
+			}
+
+
+			void Clear()
+			{
+				_componentPools.clear();
+				_entities.clear();
+				nextEntity = 0;
 			}
 
 
