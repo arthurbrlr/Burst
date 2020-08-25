@@ -81,6 +81,18 @@ namespace Burst {
 				}
 			}
 
+
+			void RemoveComponent(Entity& entity, Component* component)
+			{
+				ComponentID compID = component->GetComponentID();
+				if ( _componentPools[compID].At(entity) ) {
+					_componentPools[compID].RemoveComponent(entity);
+#ifdef _BURST_DEBUG
+					std::cout << "Removing component of id : " << compID << " of entity " << entity << std::endl;
+#endif
+				}
+			}
+
 			template<typename T>
 			T* GetComponent(Entity& entity)
 			{

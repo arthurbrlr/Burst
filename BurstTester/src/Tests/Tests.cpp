@@ -30,11 +30,11 @@ bool Emplace_Remove_View()
 
 	registery.AddComponent<Transform>(entity);
 	registery.AddComponent<Sprite>(entity);
-	registery.AddComponent<PtrComponent>(entity);
+	PtrComponent* ptrcomp = registery.AddComponent<PtrComponent>(entity);
 	registery.AddComponent<Mesh>(entity);
 
 	registery.RemoveComponent<Transform>(entity);
-	registery.RemoveComponent<Sprite>(entity);
+	registery.RemoveComponent(entity, ptrcomp);
 
 	auto entityComponents = registery.View(entity);
 	ASSERT(entityComponents.size() == 2)
@@ -45,7 +45,7 @@ bool Emplace_Remove_View()
 
 bool Emplace_RemoveEntity_View()
 {
-	START_TEST(Emplace_Remove_View);
+	START_TEST(Emplace_RemoveEntity_View);
 
 	Burst::Registery<> registery;
 	Burst::Entity entity = registery.NewEntity();
