@@ -160,7 +160,9 @@ namespace Burst {
 
 			Entity GetEntityFromExternID(const TExternalEntityIdentifier& id)
 			{
-				return _entities[id];
+				if ( _entities.find(id) != _entities.end() )
+					return _entities[id];
+				return -1;
 			}
 
 		private:
