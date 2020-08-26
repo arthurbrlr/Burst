@@ -87,6 +87,49 @@ bool ClearRegistery()
 }
 
 
+bool Templated_Emplace_Remove_View()
+{
+	START_TEST(Templated_Emplace_Remove_View);
+
+	Burst::Registery<std::string> registery;
+	Burst::Entity entity = registery.NewEntity("firstEntity");
+
+	registery.AddComponent<Transform>(entity);
+	registery.AddComponent<Sprite>(entity);
+	PtrComponent* ptrcomp = registery.AddComponent<PtrComponent>(entity);
+	registery.AddComponent<Mesh>(entity);
+
+	registery.RemoveComponent<Transform>(entity);
+	registery.RemoveComponent(entity, ptrcomp);
+
+	auto entityComponents = registery.View(entity);
+	ASSERT(entityComponents.size() == 2)
+
+	END_TEST(Templated_Emplace_Remove_View);
+}
+
+
+bool Templated_Emplace_RemoveEntity_View()
+{
+	START_TEST(Templated_Emplace_RemoveEntity_View);
+
+	Burst::Registery<std::string> registery;
+	Burst::Entity entity = registery.NewEntity("firstEntity");
+
+	registery.AddComponent<Transform>(entity);
+	registery.AddComponent<Sprite>(entity);
+	registery.AddComponent<PtrComponent>(entity);
+	registery.AddComponent<Mesh>(entity);
+
+	registery.RemoveEntity("firstEntity");
+
+	auto entityComponents = registery.View(entity);
+	ASSERT(entityComponents.size() == 0)
+
+	END_TEST(Templated_Emplace_RemoveEntity_View);
+}
+
+
 bool Perfos_AddComponent()
 {
 	START_TEST(Perfos_AddComponent);

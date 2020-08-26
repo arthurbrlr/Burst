@@ -25,10 +25,16 @@
 												success = false; \
 											}
 
+
+	/* Normal */
 bool Emplace_View();
 bool Emplace_Remove_View();
 bool Emplace_RemoveEntity_View();
 
 bool ClearRegistery();
+
+	/* Templated */
+bool Templated_Emplace_Remove_View();
+bool Templated_Emplace_RemoveEntity_View();
 
 bool Perfos_AddComponent();

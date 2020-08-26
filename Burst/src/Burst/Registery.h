@@ -43,6 +43,17 @@ namespace Burst {
 			}
 
 
+			void RemoveEntity(const TExternalEntityIdentifier& id)
+			{
+				Entity entity = _entities[id];
+				for ( auto& componentPair : _componentPools ) {
+					if ( componentPair.second.At(entity) )
+						componentPair.second.RemoveComponent(entity);
+				}
+				_entities.erase(id);
+			}
+
+
 			void Clear()
 			{
 				_componentPools.clear();
