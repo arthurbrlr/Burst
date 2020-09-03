@@ -4,6 +4,7 @@
 #include "ComponentPool.h"
 
 #include <assert.h>
+#include <vector>
 
 namespace Burst {
 
@@ -75,9 +76,9 @@ namespace Burst {
 				std::cout << "Emplacing component of id : " << compID << " into entity " << entity << std::endl;
 #endif
 				if ( !_componentPools[compID].Initialised() ) {
-					_componentPools[compID].InitialisePool<T>(10000);
+					_componentPools[compID].template InitialisePool<T>(10000);
 				}
-				return _componentPools[compID].CreateComponent<T>(entity, args...);
+				return _componentPools[compID].template CreateComponent<T>(entity, args...);
 			}
 
 			template<typename T>

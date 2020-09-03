@@ -50,7 +50,7 @@ namespace Burst {
 			T* CreateComponent(Entity& entity, Args... args)
 			{
 				if ( _poolSize < _count + 1 ) {
-					throw std::out_of_range::exception("Error: pool has no more space");
+					throw std::out_of_range::exception(); // Error: pool has no more space
 					return nullptr;
 				}
 

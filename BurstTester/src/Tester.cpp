@@ -11,15 +11,15 @@
 
 int main()
 {
-    //bool emplaceView = Emplace_View();
-    //bool emplaceRemoveView = Emplace_Remove_View();
-    //bool emplaceRemoveEntityView = Emplace_RemoveEntity_View();
-    //bool clearRegistery = ClearRegistery();
+    bool emplaceView = Emplace_View();
+    bool emplaceRemoveView = Emplace_Remove_View();
+    bool emplaceRemoveEntityView = Emplace_RemoveEntity_View();
+    bool clearRegistery = ClearRegistery();
 
     bool templated_emplaceRemoveView = Templated_Emplace_Remove_View();
     bool templated_emplaceRemoveEntityView = Templated_Emplace_RemoveEntity_View();
 
-#ifdef NDEBUG
+#ifndef _DEBUG
     bool perfAddComponent = Perfos_AddComponent();
 #endif
 }
